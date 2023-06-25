@@ -3,8 +3,9 @@
 </script>
 
 <template>
-  <RouterView/>
+<div>我是分类页面</div>
 </template>
 
 <style scoped>
+
 </style>
