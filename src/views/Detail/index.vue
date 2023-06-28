@@ -3,7 +3,6 @@ import {getDetail} from "@/apis/detail";
 import {onMounted, ref} from "vue";
 import {onBeforeRouteUpdate, useRoute} from "vue-router";
 import DetailHot from "@/views/Detail/components/DetailHot.vue";
-import XtxGoodSku from "@/components/XtxSku/index.vue";
 
 const goods = ref({});
 const route = useRoute();
