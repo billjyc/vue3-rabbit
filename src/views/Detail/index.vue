@@ -1,7 +1,8 @@
 <script setup>
 import {getDetail} from "@/apis/detail";
 import {onMounted, ref} from "vue";
-import {useRoute} from "vue-router";
+import {onBeforeRouteUpdate, useRoute} from "vue-router";
+import DetailHot from "@/views/Detail/components/DetailHot.vue";
 
 const goods = ref({});
 const route = useRoute();
@@ -11,6 +12,13 @@ const getGoods = async () => {
 }
 
 onMounted(()=> getGoods());
+
+// 目标：路由参数变化的时候，可以把分类数据接口重新发送
+onBeforeRouteUpdate((to) => {
+  console.log(to);
+  getGoods(to.params.id);
+});
+
 
 </script>
 
@@ -116,7 +124,10 @@ onMounted(()=> getGoods());
             </div>
             <!-- 24热榜+专题推荐 -->
             <div class="goods-aside">
-
+              <!--24小时 -->
+              <DetailHot/>
+              <!--周 -->
+              <DetailHot/>
             </div>
           </div>
         </div>
