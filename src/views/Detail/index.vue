@@ -2,9 +2,8 @@
 import {getDetail} from "@/apis/detail";
 import {onMounted, ref} from "vue";
 import {onBeforeRouteUpdate, useRoute} from "vue-router";
-import ImageView from "@/components/ImageView/index.vue";
 import DetailHot from "@/views/Detail/components/DetailHot.vue";
-import XtxSku from "@/components/XtxSku/index.vue";
+import XtxGoodSku from "@/components/XtxSku/index.vue";
 
 const goods = ref({});
 const route = useRoute();
@@ -36,7 +35,7 @@ const skuChange = (sku) => {
           </el-breadcrumb-item>
           <el-breadcrumb-item :to="{ path: `/category/sub/${goods.categories[0].id}`  }">{{ goods.categories[0].name }}
           </el-breadcrumb-item>
-          <el-breadcrumb-item>抓绒保暖，毛毛虫子儿童运动鞋</el-breadcrumb-item>
+          <el-breadcrumb-item>{{ goods.name }}</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
       <!-- 商品信息 -->
@@ -45,7 +44,7 @@ const skuChange = (sku) => {
           <div class="goods-info">
             <div class="media">
               <!-- 图片预览区 -->
-              <ImageView :image-list="goods.mainPictures"/>
+              <XtxImageView :image-list="goods.mainPictures"/>
               <!-- 统计数量 -->
               <ul class="goods-sales">
                 <li>
