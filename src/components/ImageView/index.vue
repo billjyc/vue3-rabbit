@@ -42,18 +42,22 @@ watch([elementX, elementY, isOutside], () => {
 
   if (elementY.value > 300) { top.value = 200 }
   if (elementY.value < 100) { top.value = 0 }
+
+  // 控制大图的显示
+  positionX.value = -left.value * 2;
+  positionY.value = -top.value * 2
 });
 </script>
 
 
 <template>
-  {{ elementX }}, {{elementY}}, {{ isOutside }}
+<!--  {{ elementX }}, {{elementY}}, {{ isOutside }}-->
   <div class="goods-image">
     <!-- 左侧大图-->
     <div class="middle" ref="target">
       <img :src="imageList[activeIndex]" alt="" />
       <!-- 蒙层小滑块 -->
-      <div class="layer" :style="{ left: `${left}px`, top: `${top}px` }"></div>
+      <div class="layer" :style="{ left: `${left}px`, top: `${top}px` }" v-show="!isOutside"></div>
     </div>
     <!-- 小图列表 -->
     <ul class="small">
@@ -64,11 +68,11 @@ watch([elementX, elementY, isOutside], () => {
     <!-- 放大镜大图 -->
     <div class="large" :style="[
       {
-        backgroundImage: `url(${imageList[0]})`,
-        backgroundPositionX: `0px`,
-        backgroundPositionY: `0px`,
+        backgroundImage: `url(${imageList[activeIndex]})`,
+        backgroundPositionX: `${positionX}px`,
+        backgroundPositionY: `${positionY}px`,
       },
-    ]" v-show="false"></div>
+    ]" v-show="!isOutside"></div>
   </div>
 </template>
 
