@@ -1,39 +1,12 @@
 <script setup>
-import {getCategoryAPI} from "@/apis/category";
-import {ref, onMounted} from "vue";
-import {getBannerAPI} from '@/apis/home'
-import {onBeforeRouteUpdate, useRoute} from "vue-router";
 import GoodsItem from "@/views/Home/components/GoodsItem.vue";
+import {useCategory} from "@/views/Category/composables/useCategory";
+import {useBanner} from "@/views/Category/composables/useBanner";
 
-
-const categoryData = ref({});
-const route = useRoute();
-const getCategory = async (id=route.params.id)=> {
-  const res = await getCategoryAPI(id);
-  categoryData.value = res.result;
-}
-
-onMounted(() => getCategory());
-
-// 目标：路由参数变化的时候，可以把分类数据接口重新发送
-onBeforeRouteUpdate((to) => {
-  console.log(to);
-  getCategory(to.params.id);
-});
-
-
-//获取 banner
-const bannerList = ref([]);
-const getBanner = async () => {
-  const res = await getBannerAPI({
-    distributionSite: '2'
-  });
-  console.log(res);
-  bannerList.value = res.result;
-}
-
-onMounted(() => getBanner());
-
+const {categoryData} = useCategory();
+const {bannerList} = useBanner({
+  distributionSite: '2'
+})
 </script>
 
 <template>
@@ -58,7 +31,7 @@ onMounted(() => getBanner());
         <h3>全部分类</h3>
         <ul>
           <li v-for="i in categoryData.children" :key="i.id">
-            <RouterLink to="/">
+            <RouterLink :to="`/category/sub/${i.id}`">
               <img :src="i.picture" />
               <p>{{ i.name }}</p>
             </RouterLink>
