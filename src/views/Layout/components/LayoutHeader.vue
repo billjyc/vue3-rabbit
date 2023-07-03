@@ -1,7 +1,7 @@
 <script setup>
 
 import {onMounted} from "vue";
-import {useCategoryStore} from "@/stores/category";
+import {useCategoryStore} from "@/stores/categoryStore";
 import HeaderCart from "@/views/Layout/components/HeaderCart.vue";
 
 

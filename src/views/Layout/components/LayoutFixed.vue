@@ -1,6 +1,6 @@
 <script setup>
 import {useScroll} from "@vueuse/core";
-import {useCategoryStore} from "@/stores/category";
+import {useCategoryStore} from "@/stores/categoryStore";
 import {onMounted} from "vue";
 
 const {y} = useScroll(window);
