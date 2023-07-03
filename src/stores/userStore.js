@@ -2,6 +2,7 @@ import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { loginAPI } from '@/apis/user'
 import { useCartStore } from "@/stores/cartStore";
+import { mergeCartAPI } from "@/apis/cart";
 
 export const useUserStore = defineStore(
   'user',
@@ -13,6 +14,15 @@ export const useUserStore = defineStore(
     const getUserInfo = async ({ account, password }) => {
       const res = await loginAPI({ account, password })
       userInfo.value = res.result
+      // 合并购物车操作
+      await mergeCartAPI(cartStore.cartList.map(item => {
+        return {
+          skuId: item.skuId,
+          selected: item.selected,
+          count: item.count,
+        }
+      }));
+      await cartStore.updateCartList()
     }
     // 退出时清除用户信息
     const clearUserInfo = () => {
