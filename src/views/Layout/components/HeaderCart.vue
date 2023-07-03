@@ -1,5 +1,5 @@
 <script setup>
-import { useCartStore } from "@/stores/cartStore";
+import { useCartStore } from '@/stores/cartStore'
 
 const cartStore = useCartStore()
 </script>
@@ -7,11 +7,10 @@ const cartStore = useCartStore()
 <template>
   <div class="cart">
     <a class="curr" href="javascript:;">
-      <i class="iconfont icon-cart"></i><em>{{cartStore.cartList.length}}</em>
+      <i class="iconfont icon-cart"></i><em>{{ cartStore.cartList.length }}</em>
     </a>
     <div class="layer">
       <div class="list">
-
         <div class="item" v-for="i in cartStore.cartList" :key="i">
           <RouterLink to="">
             <img :src="i.picture" alt="" />
@@ -31,10 +30,10 @@ const cartStore = useCartStore()
       </div>
       <div class="foot">
         <div class="total">
-          <p>共 10 件商品</p>
-          <p>&yen; 100.00 </p>
+          <p>共 {{ cartStore.allCount }} 件商品</p>
+          <p>&yen; {{ cartStore.allPrice.toFixed(2) }}</p>
         </div>
-        <el-button size="large" type="primary" >去购物车结算</el-button>
+        <el-button size="large" type="primary">去购物车结算</el-button>
       </div>
     </div>
   </div>
@@ -94,7 +93,7 @@ const cartStore = useCartStore()
     padding-top: 10px;
 
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       right: 14px;
       top: -10px;
