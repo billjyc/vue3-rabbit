@@ -7,7 +7,7 @@ export const useCountDown = () => {
   let timer = null;
   // 格式化时间为xx分xx秒
   const formatTime = computed(() => {
-    dayjs.unix(time.value).format('mm分ss秒')
+    return dayjs.unix(time.value).format('mm分ss秒')
   })
 
   //开启倒计时的函数
